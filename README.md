@@ -5,8 +5,8 @@ This repository contains an ONNX version of the Indoor/Outdoor scene classifier 
 ## Steps to export the ONNX model
 
 Exporting the ONNX model involves the following steps:
-1. Clone and set up the UMass-Rescue/GeoLocator repo found [here](https://github.com/UMass-Rescue/GeoLocator). Follow instructions on README.md to get a dry run of the model working.
-2. Configure [Rescue Box Desktop](https://github.com/UMass-Rescue/RescueBox-Desktop/releases) to work with the GeoLocator repo. To test that the application works, send an example request where the input are files from "input" folder from this (IOdetector-ONNX) repo. Once you get the GeoLocator model working, proceed to the next step. (note, an ```import torch``` command is missing in the flaskml-server.py script, required)
+1. Clone and set up the UMass-Rescue/GeoLocator repo found [here](https://github.com/UMass-Rescue/GeoLocator). Follow instructions on README.md to get a dry run of the model working. (Note: an ```import torch``` command is missing in the flaskml-server.py script, required)
+2. Configure [Rescue Box Desktop](https://github.com/UMass-Rescue/RescueBox-Desktop/releases) to work with the GeoLocator repo. To test that the application works, send an example request where the input are files from "input" folder from this (IOdetector-ONNX) repo. Once you get the GeoLocator model working, proceed to the next step. 
 3. Set a breakpoint at Line 195, right before the `logit = model.forward(input_img)` call in the `run_iodetector` function in `IndoorOutdoorClassifier/iodetector.py` by adding the following line: `import pdb; pdb.set_trace()`.
 4. Send a request to the GeoLocator backend again using the same inputs from the RescueBox Desktop application. The breakpoint will be triggered in the backend.
 5. Run the following python code to export the ONNX model.
