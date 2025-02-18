@@ -3,6 +3,7 @@ import torchvision.transforms.v2 as trn
 from PIL import Image
 import onnxruntime as ort
 
+
 class IOClassifierProcessing:
     def __init__(self):
         self.classes, self.labels_IO = self.load_labels()
@@ -16,7 +17,7 @@ class IOClassifierProcessing:
             for line in class_file:
                 classes.append(line.strip().split(" ")[0][3:])
         classes = tuple(classes)
-            
+
         file_name_IO = "IO_places365.txt"
         with open(file_name_IO) as f:
             lines = f.readlines()
@@ -34,50 +35,54 @@ class IOClassifierProcessing:
             [
                 trn.Resize((224, 224)),
                 trn.ToTensor(),
-                trn.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+                trn.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
             ]
         )
         return tf
-    
+
     def preprocess_single(self, image_path):
         # preprocess a single image
         img = Image.open(image_path)
         if img.mode != "RGB":
             img = img.convert("RGB")
         tf = self.returnTF()
-        input_img = tf(img).unsqueeze(0).numpy() #to numpy for onnx runtime param type
+        input_img = tf(img).unsqueeze(0).numpy()  # to numpy for onnx runtime param type
         return input_img
-    
-    
+
     def postprocess_single(self, output, image_path):
         # after forward pass? exact interaction of softmax - check
         probs = output
         idx = np.argsort(probs)[::-1]  # sort indices by descending probability
-        
+
         #  calc i/o score
         io_image = np.average(self.labels_IO[idx[:10]], weights=probs[idx[:10]])
-        
+
         result = {
             "Image": image_path,
-            "Environment Type": "Indoor" if io_image < 0.5 else "Outdoor"
+            "Environment Type": "Indoor" if io_image < 0.5 else "Outdoor",
         }
         scene = []
         for i in range(5):
             if probs[idx[i]] > 0.01:
-                scene.append({
-                    "Description": self.classes[idx[i]],
-                    "Confidence": str(round(float(probs[idx[i]]), 3))
-                })
+                scene.append(
+                    {
+                        "Description": self.classes[idx[i]],
+                        "Confidence": str(round(float(probs[idx[i]]), 3)),
+                    }
+                )
         result["Scene Category"] = scene
-        
+
         return result
-    
+
+
 class IOClassifierModel:
     def __init__(self, model_path):
         self.processor = IOClassifierProcessing()
         self.session = ort.InferenceSession(
             model_path,
-            providers=["CPUExecutionProvider"] # "CUDAExecutionProvider" add this param if needed for GPU exec
+            providers=[
+                "CPUExecutionProvider"
+            ],  # "CUDAExecutionProvider" add this param if needed for GPU exec
         )
 
     def _softmax(self, x):
@@ -87,7 +92,6 @@ class IOClassifierModel:
     def predict(self, image_path):
         input = self.processor.preprocess_single(image_path)
         output = self.session.run(None, {"input": input})
-        probs = self._softmax(output[0][0]) #redundant if softmax is already applied
+        probs = self._softmax(output[0][0])  # redundant if softmax is already applied
         result = self.processor.postprocess_single(probs, image_path)
         return result
-    
