@@ -26,9 +26,9 @@ torch.onnx.export(
 
 The resulting ONNX model will be saved as "iodetector.onnx" in the directory where the `flaskml-server.py` exists.
 
-## 1. Installation 
+## Installation, Setup and Usage
 
-### Clone the Repository:
+### 1. Clone the Repository:
 ```bash
 git clone https://github.com/SribatschaMaharana/IOdetector-ONNX.git
 cd IOdetector-ONNX
