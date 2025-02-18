@@ -58,7 +58,7 @@ venv\Scripts\activate  # For Windows
 pip install -r requirements.txt
 ```
 
-### 4. Run the backend server
+### 4. Run the backend server and model
 To start the Flask-ML server:
 ```bash
 python onnx-server.py
