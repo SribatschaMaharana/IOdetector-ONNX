@@ -2,8 +2,6 @@ import numpy as np
 import torchvision.transforms.v2 as trn
 from PIL import Image
 import onnxruntime as ort
-import os
-
 
 class IOClassifierProcessing:
     def __init__(self):
