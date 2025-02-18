@@ -90,7 +90,7 @@ And there you have it!
 The output is a JSON file containing:
 - Indoor/Outdoor Classification: Information about the environment in which the image was captured, and the top 5 scene categories.
 
-The model used was originally created by the authors of the following paper:
+The original model, converted to ONNX format here, was based on the work described in the following paper:
 
 ```bibtex
  @article{zhou2017places,
