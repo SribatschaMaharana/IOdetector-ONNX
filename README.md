@@ -36,7 +36,7 @@ cd IOdetector-ONNX
 
 ### 2. Set Up a Virtual Environment
 Create a new virtual environment using any tool you prefer. For the first example, I use Conda, but you can also use `pipenv` or Python's `venv` as alternatives.
-`
+
 #### Option 1: Using Conda
 
 If you prefer using **Conda**, create and activate your environment with:
