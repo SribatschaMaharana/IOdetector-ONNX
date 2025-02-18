@@ -2,7 +2,7 @@ import numpy as np
 import torchvision.transforms.v2 as trn
 from PIL import Image
 import onnxruntime as ort
-#import os
+import os
 
 
 class IOClassifierProcessing:
@@ -50,24 +50,10 @@ class IOClassifierProcessing:
         input_img = tf(img).unsqueeze(0).numpy() #to numpy for onnx runtime param type
         return input_img
     
-    # def preprocess_directory(self, directory_path): #not needed for now
-    #     # preprocess all images in dir
-    #     images = []
-    #     paths = []
-    #     for filename in os.listdir(directory_path):
-    #         if filename.lower().endswith(self.valid_extensions):
-    #             file_path = os.path.join(directory_path, filename)
-    #             try:
-    #                 input_img = self.preprocess_single(file_path)
-    #                 images.append(input_img)
-    #                 paths.append(file_path)
-    #             except Exception as e:
-    #                 print(f"Error processing {file_path}: {e}")
-    #     return images, paths
     
     def postprocess_single(self, output, image_path):
         # after forward pass? exact interaction of softmax - check
-        probs = output[0]
+        probs = output
         idx = np.argsort(probs)[::-1]  # sort indices by descending probability
         
         #  calc i/o score

@@ -1,0 +1,54 @@
+[
+    {
+        "Image": "/Users/sribatschamaharana/workspace/IOdetector-ONNX/input/beach.jpg",
+        "Environment Type": "Outdoor",
+        "Scene Category": [
+            {
+                "Description": "lagoon",
+                "Confidence": "0.488"
+            },
+            {
+                "Description": "beach",
+                "Confidence": "0.126"
+            },
+            {
+                "Description": "islet",
+                "Confidence": "0.09"
+            },
+            {
+                "Description": "ocean",
+                "Confidence": "0.062"
+            },
+            {
+                "Description": "coast",
+                "Confidence": "0.031"
+            }
+        ]
+    },
+    {
+        "Image": "/Users/sribatschamaharana/workspace/IOdetector-ONNX/input/cottage.jpeg",
+        "Environment Type": "Outdoor",
+        "Scene Category": [
+            {
+                "Description": "cottage",
+                "Confidence": "0.425"
+            },
+            {
+                "Description": "oast_house",
+                "Confidence": "0.14"
+            },
+            {
+                "Description": "house",
+                "Confidence": "0.061"
+            },
+            {
+                "Description": "formal_garden",
+                "Confidence": "0.047"
+            },
+            {
+                "Description": "chalet",
+                "Confidence": "0.038"
+            }
+        ]
+    }
+]
