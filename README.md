@@ -25,3 +25,73 @@ torch.onnx.export(
 ```
 
 The resulting ONNX model will be saved as "iodetector.onnx" in the directory where the `flaskml-server.py` exists.
+
+## 1. Installation 
+
+### Clone the Repository:
+```bash
+git clone https://github.com/SribatschaMaharana/IOdetector-ONNX.git
+cd IOdetector-ONNX
+```
+
+### 2. Set Up a Virtual Environment
+Create a new virtual environment using any tool you prefer. I use  `conda` for this example. You can use `pipenv` or `python venv` as well.
+
+#### Option 1: Using Conda
+
+If you prefer using **Conda**, create and activate your environment with:
+
+```bash
+conda create --name myenv python=3.12
+conda activate myenv
+```
+
+#### Option 2: Using venv
+```bash
+python -m venv venv
+source venv/bin/activate  # For Mac/Linux
+venv\Scripts\activate  # For Windows
+```
+
+### 3. Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Running the backend server
+To start the Flask-ML server:
+```bash
+python onnx-server.py
+```
+The server will run on http://127.0.0.1:5000 by default.
+
+### Using the Frontend (RescueBox)
+- Open the RescueBox interface.
+- Register the model with the server's IP address (127.0.0.1) and port (5000).
+- Upload images to the "Indoor/Outdoor Classifier - ONNX" model.
+- Provide an input batch of files, or a input directory path. there are sample images in the repo (e.g., IOdetector/input).
+- Provide an output JSON file path or directory (e.g., IOdetector/output/(output.json)).
+- Click "Run Model" to process the images and retrieve the results.
+
+### Using the Command line interface
+The command line interface can be used to test the model. Run the following command to test the model:
+
+```bash
+# image_dir is the directory containing the images
+python iodetector-cli.py --input path/to/imagedir --output path/to/output_dir
+```
+
+### Output
+The output is a JSON file containing:
+- Indoor/Outdoor Classification: Information about the environment in which the image was captured, and the top 5 scene categories.
+
+The model used was originally created by the authors of the following paper:
+
+```bibtex
+ @article{zhou2017places,
+    title={Places: A 10 million Image Database for Scene Recognition},
+    author={Zhou, Bolei and Lapedriza, Agata and Khosla, Aditya and Oliva, Aude and Torralba, Antonio},
+    journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
+    year={2017},
+    publisher={IEEE}
+    }
