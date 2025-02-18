@@ -1,5 +1,31 @@
 [
     {
+        "Image": "/Users/sribatschamaharana/workspace/IOdetector-ONNX/input/beach.jpg",
+        "Environment Type": "Outdoor",
+        "Scene Category": [
+            {
+                "Description": "lagoon",
+                "Confidence": "0.488"
+            },
+            {
+                "Description": "beach",
+                "Confidence": "0.126"
+            },
+            {
+                "Description": "islet",
+                "Confidence": "0.09"
+            },
+            {
+                "Description": "ocean",
+                "Confidence": "0.062"
+            },
+            {
+                "Description": "coast",
+                "Confidence": "0.031"
+            }
+        ]
+    },
+    {
         "Image": "/Users/sribatschamaharana/workspace/IOdetector-ONNX/input/cottage.jpeg",
         "Environment Type": "Outdoor",
         "Scene Category": [

@@ -58,28 +58,33 @@ venv\Scripts\activate  # For Windows
 pip install -r requirements.txt
 ```
 
-### 4. Run the backend server and model
+### 4. Run the backend server
 To start the Flask-ML server:
 ```bash
 python onnx-server.py
 ```
 The server will run on http://127.0.0.1:5000 by default.
 
+### 5. Run the IOdetector model
+
 ### Using the Frontend (RescueBox)
 - Open the RescueBox interface.
 - Register the model with the server's IP address (127.0.0.1) and port (5000).
 - Upload images to the "Indoor/Outdoor Classifier - ONNX" model.
-- Provide an input batch of files, or a input directory path. there are sample images in the repo (e.g., IOdetector/input).
-- Provide an output JSON file path or directory (e.g., IOdetector/output/(output.json)).
+- Provide an input batch of files, or a input directory path. there are sample images in the repo (`~/IOdetector/input`).
+- Provide an output JSON file path or directory (e.g., `~/IOdetector/output/output.json`).
 - Click "Run Model" to process the images and retrieve the results.
 
-### Using the Command line interface
-The command line interface can be used to test the model. Run the following command to test the model:
+![IOdetector frontend](./images/IO_frontend_report.png)
 
+### Using the Command line interface
+There is a command line interface that can be used to run this model. Run the following command:
 ```bash
 # image_dir is the directory containing the images
 python iodetector-cli.py --input path/to/imagedir --output path/to/output_dir
 ```
+![IOdetector CLI](./images/IO_cli_report.png)
+And there you have it!
 
 ### Output
 The output is a JSON file containing:
