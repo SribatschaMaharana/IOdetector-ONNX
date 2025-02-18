@@ -78,10 +78,18 @@ The server will run on http://127.0.0.1:5000 by default.
 ![IOdetector frontend](./images/IO_frontend_report.png)
 
 ### Using the Command line interface
-There is a command line interface that can be used to run this model. Run the following command:
+
+
 ```bash
-# image_dir is the directory containing the images
-python iodetector-cli.py --input path/to/imagedir --output path/to/output_dir
+# imagedir is the directory containing images to test
+python iodetector-cli.py --input path/to/imagedir_or_file --output path/to/outputdir_or_output.json
+```
+
+There is a command line interface that can be used to run this model. The `--input` param can be either a directory containing images or specific image files, and the `--output` param can be either a directory or a specific output JSON file. 
+
+```bash
+# imagedir is the directory containing test images
+python iodetector-cli.py --input path/to/imagedir_or_file --output path/to/outputdir_or_output.json
 ```
 ![IOdetector CLI](./images/IO_cli_report.png)
 And there you have it!
